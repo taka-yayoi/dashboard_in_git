@@ -1,0 +1,225 @@
+{
+  "datasets" : [ {
+    "name" : "455de33f",
+    "displayName" : "covid_cases_base",
+    "query" : "SELECT * FROM takaakiyayoi_catalog.covid.covid_cases_base"
+  }, {
+    "name" : "ec8c91fd",
+    "displayName" : "pref_area",
+    "query" : "SELECT * FROM takaakiyayoi_catalog.covid.pref_area"
+  } ],
+  "pages" : [ {
+    "name" : "86050dca",
+    "displayName" : "無題のページ",
+    "layout" : [ {
+      "widget" : {
+        "name" : "fc0b6643",
+        "queries" : [ {
+          "name" : "main_query",
+          "query" : {
+            "datasetName" : "455de33f",
+            "fields" : [ {
+              "name" : "sum(Cases)",
+              "expression" : "SUM(`Cases`)"
+            } ],
+            "disaggregated" : false
+          }
+        } ],
+        "spec" : {
+          "version" : 2,
+          "widgetType" : "counter",
+          "encodings" : {
+            "value" : {
+              "fieldName" : "sum(Cases)",
+              "displayName" : "Sum of Cases"
+            }
+          },
+          "frame" : {
+            "title" : "Total COVID-19 Cases",
+            "showTitle" : true
+          }
+        }
+      },
+      "position" : {
+        "x" : 0,
+        "y" : 0,
+        "width" : 3,
+        "height" : 6
+      }
+    }, {
+      "widget" : {
+        "name" : "fd5c36cc",
+        "queries" : [ {
+          "name" : "main_query",
+          "query" : {
+            "datasetName" : "455de33f",
+            "fields" : [ {
+              "name" : "Prefecture",
+              "expression" : "`Prefecture`"
+            }, {
+              "name" : "monthly(date_timestamp)",
+              "expression" : "DATE_TRUNC(\"MONTH\", `date_timestamp`)"
+            }, {
+              "name" : "sum(Cases)",
+              "expression" : "SUM(`Cases`)"
+            } ],
+            "disaggregated" : false
+          }
+        } ],
+        "spec" : {
+          "version" : 3,
+          "widgetType" : "line",
+          "encodings" : {
+            "x" : {
+              "fieldName" : "monthly(date_timestamp)",
+              "scale" : {
+                "type" : "temporal"
+              },
+              "displayName" : "date_timestamp"
+            },
+            "y" : {
+              "fieldName" : "sum(Cases)",
+              "scale" : {
+                "type" : "quantitative"
+              },
+              "displayName" : "Sum of Cases"
+            },
+            "color" : {
+              "fieldName" : "Prefecture",
+              "scale" : {
+                "type" : "categorical"
+              },
+              "displayName" : "Prefecture"
+            }
+          },
+          "frame" : {
+            "title" : "COVID-19 Cases by Prefecture",
+            "showTitle" : true
+          }
+        }
+      },
+      "position" : {
+        "x" : 3,
+        "y" : 0,
+        "width" : 3,
+        "height" : 6
+      }
+    }, {
+      "widget" : {
+        "name" : "16def70e",
+        "queries" : [ {
+          "name" : "main_query",
+          "query" : {
+            "datasetName" : "455de33f",
+            "fields" : [ {
+              "name" : "Prefecture",
+              "expression" : "`Prefecture`"
+            }, {
+              "name" : "Cases",
+              "expression" : "`Cases`"
+            }, {
+              "name" : "date_timestamp",
+              "expression" : "`date_timestamp`"
+            } ],
+            "disaggregated" : true
+          }
+        } ],
+        "spec" : {
+          "version" : 1,
+          "widgetType" : "table",
+          "encodings" : {
+            "columns" : [ {
+              "fieldName" : "Prefecture",
+              "title" : "Prefecture",
+              "booleanValues" : [ "false", "true" ],
+              "type" : "string",
+              "displayAs" : "string",
+              "displayName" : "Prefecture"
+            }, {
+              "fieldName" : "Cases",
+              "title" : "Cases",
+              "booleanValues" : [ "false", "true" ],
+              "type" : "integer",
+              "displayAs" : "number",
+              "displayName" : "Cases"
+            }, {
+              "fieldName" : "date_timestamp",
+              "title" : "date_timestamp",
+              "booleanValues" : [ "false", "true" ],
+              "type" : "datetime",
+              "displayAs" : "datetime",
+              "displayName" : "date_timestamp"
+            } ]
+          },
+          "invisibleColumns" : [ ],
+          "allowHTMLByDefault" : false,
+          "itemsPerPage" : 25,
+          "paginationSize" : "default",
+          "condensed" : true,
+          "withRowNumber" : false,
+          "frame" : {
+            "title" : "COVID-19 Cases Data Table",
+            "showTitle" : true
+          }
+        }
+      },
+      "position" : {
+        "x" : 0,
+        "y" : 6,
+        "width" : 3,
+        "height" : 6
+      }
+    }, {
+      "widget" : {
+        "name" : "f85b5d0a",
+        "queries" : [ {
+          "name" : "main_query",
+          "query" : {
+            "datasetName" : "455de33f",
+            "fields" : [ {
+              "name" : "sum(Cases)",
+              "expression" : "SUM(`Cases`)"
+            }, {
+              "name" : "Prefecture",
+              "expression" : "`Prefecture`"
+            } ],
+            "disaggregated" : false
+          }
+        } ],
+        "spec" : {
+          "version" : 3,
+          "widgetType" : "pie",
+          "encodings" : {
+            "angle" : {
+              "fieldName" : "sum(Cases)",
+              "scale" : {
+                "type" : "quantitative"
+              },
+              "displayName" : "Sum of Cases"
+            },
+            "color" : {
+              "fieldName" : "Prefecture",
+              "scale" : {
+                "type" : "categorical"
+              },
+              "displayName" : "Prefecture"
+            },
+            "label" : {
+              "show" : true
+            }
+          },
+          "frame" : {
+            "title" : "Proportion of COVID-19 Cases by Prefecture",
+            "showTitle" : true
+          }
+        }
+      },
+      "position" : {
+        "x" : 3,
+        "y" : 6,
+        "width" : 3,
+        "height" : 6
+      }
+    } ]
+  } ]
+}
